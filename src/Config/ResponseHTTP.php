@@ -20,6 +20,10 @@ class ResponseHTTP
   {
     return self::handleStatus(400, $response);
   }
+  final static public function status_401($response = 'Unauthorized')
+  {
+    return self::handleStatus(401, $response);
+  }
   final static public function status_404($response = 'Route not found')
   {
     return self::handleStatus(404, $response);
