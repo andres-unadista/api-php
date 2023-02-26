@@ -1,5 +1,6 @@
 <?php
 use App\Config\Security;
+use App\DB\Connection;
 
 /* var_dump(Security::secretKey());
 $password = 'Hello';
@@ -11,4 +12,5 @@ var_dump('Contraseña válida');
 var_dump('Contraseña inválida');
 } */
 
-echo Security::createJWT(Security::secretKey(), ['name' => 'Dayana']);
+// echo Security::createJWT(Security::secretKey(), ['name' => 'Dayana']);
+Connection::getConnection();
