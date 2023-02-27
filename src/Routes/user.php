@@ -6,7 +6,7 @@ use App\Controllers\UserController;
 $method = $_SERVER['REQUEST_METHOD'];
 $route = $_GET['route'];
 $params = explode('/', $route);
-$data = $_POST;
+$data = json_decode(file_get_contents('php://input'), true);
 $headers = getallheaders();
 $user = new UserController(
   method: $method,

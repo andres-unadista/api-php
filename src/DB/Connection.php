@@ -13,6 +13,7 @@ class Connection
   private static $user;
   private static $password;
   private static $opt;
+  public static $conn;
 
   public function __construct()
   {
@@ -32,13 +33,15 @@ class Connection
     self::$password = $data_db['password'];
     self::$opt = [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
   }
-  final public static function getConnection()
+  final public static function getConnection(): void
   {
     try {
       new static ();
       $conn = new PDO(self::$dns, self::$user, self::$password, self::$opt);
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
       error_log('Conexión exitosa');
+      self::$conn = $conn;
     } catch (PDOException $e) {
       error_log('Error connection: ' . $e->getMessage());
       die(ResponseHTTP::status_500());
