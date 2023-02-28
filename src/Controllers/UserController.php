@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\UserModel;
+
 class UserController extends Controller
 {
   public function __construct(
@@ -11,6 +13,29 @@ class UserController extends Controller
     private $headers
   )
   {
+  }
+  final public function login(string $endpoint)
+  {
+    if (
+      strtolower($this->method) === 'post' &&
+      str_replace('/', '', $endpoint) === $this->route
+    ) {
+      $rulesValidate = [
+        'email'    => 'required|email',
+        'password' => 'required',
+      ];
+      $validateErrors = $this->validateInputs($rulesValidate, $this->data);
+      if (count($validateErrors) > 0) {
+        echo json_encode($validateErrors);
+      } else {
+        $email = strtolower($this->data['email']);
+        $password = $this->data['password'];
+        $userModel = new UserModel();
+        $user = $userModel->login(password: $password, email: $email);
+        echo json_encode($user);
+      }
+      exit;
+    }
   }
 
   final public function post(string $endpoint)
@@ -26,11 +51,13 @@ class UserController extends Controller
         'confirm_password' => 'required|equal:password',
       ];
 
-      $validate = $this->validateInputs($rulesValidate, $this->data);
-      if (count($validate) > 0) {
-        echo json_encode($validate);
+      $validateErrors = $this->validateInputs($rulesValidate, $this->data);
+      if (count($validateErrors) > 0) {
+        echo json_encode($validateErrors);
       } else {
-        echo json_encode($this->data);
+        $userModel = new UserModel();
+        $user = $userModel->save($this->data);
+        echo json_encode($user);
       }
       exit;
     }

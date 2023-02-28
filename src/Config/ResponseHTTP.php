@@ -5,7 +5,7 @@ namespace App\Config;
 class ResponseHTTP
 {
   private static $message = [
-    'status' => '',
+    'status'  => '',
     'message' => ''
   ];
   final static public function status_200($response)
@@ -18,22 +18,22 @@ class ResponseHTTP
   }
   final static public function status_400($response = 'Request in incorrect format')
   {
-    return self::handleStatus(400, $response);
+    return self::handleStatus(400, $response, true);
   }
   final static public function status_401($response = 'Unauthorized')
   {
-    return self::handleStatus(401, $response);
+    return self::handleStatus(401, $response, true);
   }
   final static public function status_404($response = 'Route not found')
   {
-    return self::handleStatus(404, $response);
+    return self::handleStatus(404, $response, true);
   }
   final static public function status_500($response = 'Internal server error')
   {
-    return self::handleStatus(500, $response);
+    return self::handleStatus(500, $response, true);
   }
 
-  private static function handleStatus(int $code, string $message, $fail = false)
+  private static function handleStatus(int $code, string|array $message, $fail = false)
   {
     header('Content-Type: application/json');
     http_response_code($code);
@@ -43,6 +43,6 @@ class ResponseHTTP
       self::$message['status'] = 'ok';
     }
     self::$message['message'] = $message;
-    return json_encode(self::$message);
+    return self::$message;
   }
 }

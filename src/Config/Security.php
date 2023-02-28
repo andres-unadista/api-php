@@ -32,13 +32,13 @@ class Security
   final public static function createJWT(string $key, array $data)
   {
     $payload = [
-      "iat" => time(),
-      "exp" => time() + (10 * 60),
+      "iat"  => time(),
+      "exp"  => time() + (10 * 60),
       "data" => $data
     ];
 
     $jwt = JWT::encode($payload, $key, 'HS256');
-    return json_encode($jwt);
+    return $jwt;
   }
 
   final public static function verifyToken(array $token, string $key)

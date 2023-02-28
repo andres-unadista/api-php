@@ -18,4 +18,4 @@ $user = new UserController(
 
 $user->post('/user');
 
-echo ResponseHTTP::status_404();
+echo json_encode(ResponseHTTP::status_404());

@@ -1,21 +1,25 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use App\DB\Connection;
 use PDO;
 
 class Model
 {
-  public static string $table = '';
-  protected static PDO $conn;
-  final public static function find($column, $cond, $value)
+  public string $table = '';
+  protected PDO $conn;
+
+  public function __construct()
   {
-    $table = self::$table;
-    $query = "SELECT * FROM {$table} WHERE {$column} {$cond} :{$column}";
     Connection::getConnection();
-    $db = Connection::$conn;
-    $stm = $db->prepare($query);
+    $this->conn = Connection::$conn;
+  }
+  final public function find($column, $cond, $value)
+  {
+    $query = "SELECT * FROM {$this->table} WHERE {$column} {$cond} :{$column}";
+
+    $stm = $this->conn->prepare($query);
     $stm->execute([
       $column => $value
     ]);

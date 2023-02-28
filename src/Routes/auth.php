@@ -1,16 +1,21 @@
 <?php
-use App\Config\Security;
-use App\DB\Connection;
 
-/* var_dump(Security::secretKey());
-$password = 'Hello';
-$hash = Security::createPassword($password);
-var_dump($hash);
-if (Security::verifyPassword($password, $hash)) {
-var_dump('Contraseña válida');
-} else {
-var_dump('Contraseña inválida');
-} */
+use App\Config\ResponseHTTP;
+use App\Controllers\UserController;
 
-// echo Security::createJWT(Security::secretKey(), ['name' => 'Dayana']);
-Connection::getConnection();
+$method = $_SERVER['REQUEST_METHOD'];
+$route = $_GET['route'];
+$params = explode('/', $route);
+$data = json_decode(file_get_contents('php://input'), true);
+$headers = getallheaders();
+$user = new UserController(
+  method: $method,
+  params: $params,
+  route: $route,
+  data: $data,
+  headers: $headers
+);
+
+$user->login('/auth');
+
+echo json_encode(ResponseHTTP::status_404());
