@@ -18,4 +18,8 @@ $user = new UserController(
 
 $user->post('/user');
 
+$user->getAll("/user");
+
+$user->getOne("/user/$params[1]");
+
 echo json_encode(ResponseHTTP::status_404());

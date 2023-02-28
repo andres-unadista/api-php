@@ -70,4 +70,30 @@ class UserModel extends Model
     }
     return ResponseHTTP::status_500('Internal error when inserting user');
   }
+
+  public function get(string $dni)
+  {
+    try {
+      $user = parent::find('dni', '=', $dni);
+      if ($user) {
+        return ResponseHTTP::status_200($user);
+      }
+      return ResponseHTTP::status_404('DNI not found');
+    } catch (PDOException $e) {
+      error_log('Get user => ' . $e);
+      return ResponseHTTP::status_500();
+    }
+  }
+
+  public function getAll()
+  {
+    try {
+      $columns = 'id_user, name, dni, email, rol';
+      $users = parent::findAll($columns);
+      return ResponseHTTP::status_200($users);
+    } catch (PDOException $e) {
+      error_log('Get users => ' . $e);
+      return ResponseHTTP::status_500();
+    }
+  }
 }

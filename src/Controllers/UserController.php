@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Config\Security;
 use App\Models\UserModel;
 
 class UserController extends Controller
@@ -14,11 +15,49 @@ class UserController extends Controller
   )
   {
   }
+
+
+  /* GET USERS */
+  final public function getAll(string $endpoint)
+  {
+    if (strtolower($this->method) === 'get' && trim($endpoint, '/') === $this->route) {
+      Security::verifyToken($this->headers, Security::secretKey());
+      $userModel = new UserModel();
+      $user = $userModel->getAll();
+      echo json_encode($user);
+      exit;
+    }
+  }
+  final public function getOne(string $endpoint)
+  {
+    if (strtolower($this->method) === 'get' && trim($endpoint, '/') === $this->route) {
+      Security::verifyToken($this->headers, Security::secretKey());
+      $data = [
+        "dni" => $this->params[1]
+      ];
+
+      $rulesValidate = [
+        "dni" => 'required|number'
+      ];
+
+      $validateErrors = $this->validateInputs($rulesValidate, $data);
+      if (count($validateErrors) > 0) {
+        echo json_encode($validateErrors);
+      } else {
+        $userModel = new UserModel();
+        $user = $userModel->get(dni: $data['dni']);
+        echo json_encode($user);
+      }
+      exit;
+    }
+  }
+
+  /* LOGIN */
   final public function login(string $endpoint)
   {
     if (
       strtolower($this->method) === 'post' &&
-      str_replace('/', '', $endpoint) === $this->route
+      trim($endpoint, '/') === $this->route
     ) {
       $rulesValidate = [
         'email'    => 'required|email',
@@ -38,9 +77,11 @@ class UserController extends Controller
     }
   }
 
+  /* INSERT USER */
   final public function post(string $endpoint)
   {
-    if (strtolower($this->method) === 'post' && str_replace('/', '', $endpoint) === $this->route) {
+    if (strtolower($this->method) === 'post' && trim($endpoint, '/') === $this->route) {
+      Security::verifyToken($this->headers, Security::secretKey());
       header('Content-Type: application/json');
       $rulesValidate = [
         'name'             => 'required|string',

@@ -25,4 +25,12 @@ class Model
     ]);
     return $stm->fetch();
   }
+  final public function findAll($columns = '*')
+  {
+    $query = "SELECT {$columns} FROM {$this->table}";
+
+    $stm = $this->conn->prepare($query);
+    $stm->execute();
+    return $stm->fetchAll();
+  }
 }

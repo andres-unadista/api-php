@@ -33,7 +33,7 @@ class Security
   {
     $payload = [
       "iat"  => time(),
-      "exp"  => time() + (10 * 60),
+      "exp"  => time() + (60 * 60),
       "data" => $data
     ];
 
@@ -43,8 +43,8 @@ class Security
 
   final public static function verifyToken(array $token, string $key)
   {
-    if (!isset($data['Authorization'])) {
-      die(ResponseHTTP::status_400());
+    if (!isset($token['Authorization'])) {
+      die(json_encode(ResponseHTTP::status_400('Invalid token')));
     }
 
     try {
@@ -52,8 +52,9 @@ class Security
       $data = JWT::decode($jwt[1], new Key($key, 'HS256'));
       self::$jwt_data = $data;
       return $data;
-    } catch (Exception $e) {
-      die(ResponseHTTP::status_401());
+    } catch (\Exception $e) {
+      error_log('Token invalid => ' . $e);
+      die(json_encode(ResponseHTTP::status_401()));
     }
   }
 

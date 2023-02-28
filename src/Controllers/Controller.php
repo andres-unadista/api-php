@@ -69,12 +69,14 @@ class Controller
 
 
     array_map(function ($input, $key) use ($rules, $data, &$validateInputs) {
-      $errors = [];
-      $rules = $this->getArrayRules($rules[$key]);
-      $errors = $this->validateArrayRule($rules, $input, $key, $data);
+      if (array_key_exists($key, $rules)) {
+        $errors = [];
+        $rules = $this->getArrayRules($rules[$key]);
+        $errors = $this->validateArrayRule($rules, $input, $key, $data);
 
-      if (count($errors) > 0) {
-        $validateInputs = array_merge($validateInputs, $errors);
+        if (count($errors) > 0) {
+          $validateInputs = array_merge($validateInputs, $errors);
+        }
       }
     }, $data, array_keys($data));
 
