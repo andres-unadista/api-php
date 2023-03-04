@@ -28,6 +28,41 @@ class UserController extends Controller
       exit;
     }
   }
+  /* DELETE USER */
+  final public function delete(string $endpoint)
+  {
+    if (strtolower($this->method) === 'delete' && trim($endpoint, '/') === $this->route) {
+      Security::verifyToken($this->headers, Security::secretKey());
+      $userModel = new UserModel();
+      $idToken = $this->data['id_token'];
+      $user = $userModel->delete($idToken);
+      echo json_encode($user);
+      exit;
+    }
+  }
+  /* UPDATE USER */
+  final public function updatePassword(string $endpoint)
+  {
+    if (strtolower($this->method) === 'patch' && trim($endpoint, '/') === $this->route) {
+      Security::verifyToken($this->headers, Security::secretKey());
+
+      $rulesValidate = [
+        "id_token"     => 'required',
+        "old_password" => 'required|length:8',
+        "password"     => 'required|length:8',
+      ];
+
+      $validateErrors = $this->validateInputs($rulesValidate, $this->data);
+      if (count($validateErrors) > 0) {
+        echo json_encode($validateErrors);
+      } else {
+        $userModel = new UserModel();
+        $user = $userModel->updatePassword($this->data);
+        echo json_encode($user);
+      }
+      exit;
+    }
+  }
   final public function getOne(string $endpoint)
   {
     if (strtolower($this->method) === 'get' && trim($endpoint, '/') === $this->route) {
@@ -81,8 +116,6 @@ class UserController extends Controller
   final public function post(string $endpoint)
   {
     if (strtolower($this->method) === 'post' && trim($endpoint, '/') === $this->route) {
-      Security::verifyToken($this->headers, Security::secretKey());
-      header('Content-Type: application/json');
       $rulesValidate = [
         'name'             => 'required|string',
         'dni'              => 'required|number',

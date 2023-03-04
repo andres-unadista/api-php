@@ -5,6 +5,8 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 use App\Config\ResponseHTTP;
 use App\Config\ErrorLog;
 
+ResponseHTTP::headerHttpDev($_SERVER['REQUEST_METHOD']);
+// ResponseHTTP::headerHttpDev($_SERVER['REQUEST_METHOD'],$_SERVER['HTTP_ORIGIN']);
 ErrorLog::activateErrorLog();
 
 if (isset($_GET['route']) && $_GET['route'] !== 'index.php') {
@@ -24,10 +26,10 @@ if (isset($_GET['route']) && $_GET['route'] !== 'index.php') {
     require_once $file;
     exit;
   } else {
-    echo ResponseHTTP::status_500();
+    echo json_encode(ResponseHTTP::status_500());
   }
 
 } else {
-  echo ResponseHTTP::status_404();
+  echo json_encode(ResponseHTTP::status_404());
 
 }

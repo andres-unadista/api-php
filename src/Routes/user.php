@@ -20,6 +20,9 @@ $user->post('/user');
 
 $user->getAll("/user");
 
+$user->delete("/user");
+$user->updatePassword("/user");
+
 $user->getOne("/user/$params[1]");
 
 echo json_encode(ResponseHTTP::status_404());

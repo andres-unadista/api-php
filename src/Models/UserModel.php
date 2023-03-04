@@ -71,6 +71,49 @@ class UserModel extends Model
     return ResponseHTTP::status_500('Internal error when inserting user');
   }
 
+  public function delete($idToken)
+  {
+    try {
+      $query = "DELETE FROM user WHERE id_token = :id_token";
+      $stm = $this->conn->prepare($query);
+      $stm->execute([
+        'id_token' => $idToken
+      ]);
+      if ($stm->rowCount() > 0) {
+        return ResponseHTTP::status_204();
+      }
+      return ResponseHTTP::status_500('Internal error when deleting user');
+    } catch (PDOException $e) {
+      error_log('Error User::delete =>' . $e);
+      return ResponseHTTP::status_500('Internal error when deleting user');
+    }
+  }
+
+  public function updatePassword($data)
+  {
+    try {
+      $user = parent::find('id_token', '=', $data['id_token']);
+      if (!Security::verifyPassword($data['old_password'], $user['password'])) {
+        error_log('Incorrect password');
+        return ResponseHTTP::status_400();
+      }
+      $query = "UPDATE user SET password = :password WHERE id_token = :id_token";
+      $stm = $this->conn->prepare($query);
+      $stm->execute([
+        'id_token' => $data['id_token'],
+        'password' => Security::createPassword($data['password']),
+      ]);
+      if ($stm->rowCount() > 0) {
+        return ResponseHTTP::status_200('User updated');
+      }
+      return ResponseHTTP::status_500('Internal error when updating user');
+    } catch (PDOException $e) {
+      error_log('Error User::updatePassword => ' . $e);
+      return ResponseHTTP::status_500('Internal error when updating user');
+    }
+
+  }
+
   public function get(string $dni)
   {
     try {
@@ -88,7 +131,7 @@ class UserModel extends Model
   public function getAll()
   {
     try {
-      $columns = 'id_user, name, dni, email, rol';
+      $columns = 'id_user, name, dni, email, rol, id_token';
       $users = parent::findAll($columns);
       return ResponseHTTP::status_200($users);
     } catch (PDOException $e) {

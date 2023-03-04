@@ -1,12 +1,45 @@
-[27-Feb-2023 22:53:34 America/Bogota] Conexión exitosa
-[27-Feb-2023 22:53:41 America/Bogota] Conexión exitosa
-[27-Feb-2023 22:54:29 America/Bogota] Conexión exitosa
-[27-Feb-2023 22:56:31 America/Bogota] Conexión exitosa
-[27-Feb-2023 22:56:37 America/Bogota] Conexión exitosa
-[27-Feb-2023 22:57:25 America/Bogota] Conexión exitosa
-[27-Feb-2023 22:57:50 America/Bogota] Conexión exitosa
-[27-Feb-2023 23:00:29 America/Bogota] Conexión exitosa
-[27-Feb-2023 23:01:42 America/Bogota] Conexión exitosa
-[27-Feb-2023 23:01:50 America/Bogota] Conexión exitosa
-[27-Feb-2023 23:04:46 America/Bogota] Conexión exitosa
-[27-Feb-2023 23:05:34 America/Bogota] Conexión exitosa
+[02-Mar-2023 21:27:37 America/Bogota] Conexión exitosa
+[02-Mar-2023 21:27:57 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:07:37 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
+Stack trace:
+#0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
+#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(69): App\Config\Security::verifyToken(Array, 'id_123dsafa')
+#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(26): App\Controllers\UserController->getOne('/user/2234526')
+#3 C:\wamp\www\PHP8\API_REST\public\index.php(24): require_once('C:\\wamp\\www\\PHP...')
+#4 {main}
+[02-Mar-2023 23:26:37 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:26:45 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:26:51 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:27:09 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:27:29 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:28:31 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
+Stack trace:
+#0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
+#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(119): App\Config\Security::verifyToken(Array, 'id_123dsafa')
+#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(19): App\Controllers\UserController->post('/user')
+#3 C:\wamp\www\PHP8\API_REST\public\index.php(25): require_once('C:\\wamp\\www\\PHP...')
+#4 {main}
+[02-Mar-2023 23:29:16 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:29:23 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:29:31 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:29:54 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:30:52 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
+Stack trace:
+#0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
+#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(69): App\Config\Security::verifyToken(Array, 'id_123dsafa')
+#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(26): App\Controllers\UserController->getOne('/user/22345261')
+#3 C:\wamp\www\PHP8\API_REST\public\index.php(25): require_once('C:\\wamp\\www\\PHP...')
+#4 {main}
+[02-Mar-2023 23:31:10 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:31:22 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
+Stack trace:
+#0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
+#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(47): App\Config\Security::verifyToken(Array, 'id_123dsafa')
+#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(24): App\Controllers\UserController->updatePassword('/user')
+#3 C:\wamp\www\PHP8\API_REST\public\index.php(25): require_once('C:\\wamp\\www\\PHP...')
+#4 {main}
+[02-Mar-2023 23:31:42 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:32:28 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:32:28 America/Bogota] Incorrect password
+[02-Mar-2023 23:32:37 America/Bogota] Conexión exitosa
+[02-Mar-2023 23:32:57 America/Bogota] Conexión exitosa
