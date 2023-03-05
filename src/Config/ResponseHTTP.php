@@ -75,7 +75,7 @@ class ResponseHTTP
     return self::handleStatus(500, $response, true);
   }
 
-  private static function handleStatus(int $code, string|array $message, $fail = false)
+  private static function handleStatus(int $code, $message, $fail = false)
   {
     http_response_code($code);
     if ($fail) {

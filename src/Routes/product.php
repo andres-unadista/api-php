@@ -1,14 +1,14 @@
 <?php
 
 use App\Config\ResponseHTTP;
-use App\Controllers\UserController;
+use App\Controllers\ProductController;
 
 $method = $_SERVER['REQUEST_METHOD'];
 $route = $_GET['route'];
 $params = explode('/', $route);
-$data = json_decode(file_get_contents('php://input'), true);
+$data = $_POST ?? json_decode(file_get_contents('php://input'), true);
 $headers = getallheaders();
-$user = new UserController(
+$product = new ProductController(
   $method,
   $route,
   $params,
@@ -16,6 +16,6 @@ $user = new UserController(
   $headers
 );
 
-$user->login('/auth');
+$product->save('/product');
 
 echo json_encode(ResponseHTTP::status_404());

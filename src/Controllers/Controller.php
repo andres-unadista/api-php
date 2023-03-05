@@ -6,6 +6,29 @@ class Controller
   private string $validate_rol = '%^[1|2|3]$%';
   private string $validate_number = '%^[0-9]+$%';
   private string $validate_text = '%^\w+$%';
+  private string $validate_stock = '%^[0-9]+$%';
+  private string $validate_desc = '%^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]{1,30}$%';
+  // ROUTE VARIABLES
+  protected $method;
+  protected $route;
+  protected $params;
+  protected $data;
+  protected $headers;
+  public function __construct(
+    $method,
+    $route,
+    $params,
+    $data,
+    $headers
+  )
+  {
+    $this->method = $method;
+    $this->route = $route;
+    $this->params = $params;
+    $this->data = $data;
+    $this->headers = $headers;
+  }
+
   final public function getArrayRules($rules): array
   {
     $rules = explode('|', $rules);
@@ -39,6 +62,21 @@ class Controller
         }
         if ($rule === 'rol' && !preg_match($this->validate_rol, $value)) {
           $errors[] = "Input $key must have a valid role";
+        }
+        if ($rule === 'text' && !preg_match($this->validate_text, $value)) {
+          $errors[] = "Input $key must have a valid text";
+        }
+        if ($rule === 'stock' && !preg_match($this->validate_stock, $value)) {
+          $errors[] = "Input $key must be a valid stock";
+        }
+        if (
+          $rule === 'desc' &&
+          !preg_match(
+            $this->validate_desc,
+            $value
+          )
+        ) {
+          $errors[] = "Input $key must be a valid description";
         }
       } else {
         if ($rule[0] === 'length' && mb_strlen($value) < $rule[1]) {

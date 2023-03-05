@@ -1,45 +1,44 @@
-[02-Mar-2023 21:27:37 America/Bogota] Conexión exitosa
-[02-Mar-2023 21:27:57 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:07:37 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
+[04-Mar-2023 23:38:05 America/Bogota] Conexión exitosa
+[04-Mar-2023 23:38:18 America/Bogota] Conexión exitosa
+[04-Mar-2023 23:38:18 America/Bogota] Product::save => PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '0' for key 'product.PRIMARY' in C:\wamp\www\PHP8\API_REST\src\Models\Product.php:35
+Stack trace:
+#0 C:\wamp\www\PHP8\API_REST\src\Models\Product.php(35): PDOStatement->execute(Array)
+#1 C:\wamp\www\PHP8\API_REST\src\Controllers\ProductController.php(27): App\Models\Product->save(Array, Array)
+#2 C:\wamp\www\PHP8\API_REST\src\Routes\product.php(19): App\Controllers\ProductController->save('/product')
+#3 C:\wamp\www\PHP8\API_REST\index.php(26): require_once('C:\\wamp\\www\\PHP...')
+#4 {main}
+[04-Mar-2023 23:39:30 America/Bogota] Conexión exitosa
+[04-Mar-2023 23:41:10 America/Bogota] Conexión exitosa
+[04-Mar-2023 23:41:22 America/Bogota] Conexión exitosa
+[04-Mar-2023 23:57:46 America/Bogota] Conexión exitosa
+[04-Mar-2023 23:57:56 America/Bogota] Conexión exitosa
+[04-Mar-2023 23:58:43 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:02:20 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:03:09 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:03:49 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:04:11 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:05:22 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:05:54 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:06:32 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:13:31 America/Bogota] PHP Warning:  preg_match(): No ending delimiter '^' found in C:\wamp\www\PHP8\API_REST\src\Controllers\Controller.php on line 74
+[05-Mar-2023 00:14:07 America/Bogota] PHP Warning:  preg_match(): No ending delimiter '^' found in C:\wamp\www\PHP8\API_REST\src\Controllers\Controller.php on line 74
+[05-Mar-2023 00:14:15 America/Bogota] PHP Warning:  preg_match(): No ending delimiter '^' found in C:\wamp\www\PHP8\API_REST\src\Controllers\Controller.php on line 74
+[05-Mar-2023 00:14:24 America/Bogota] PHP Warning:  preg_match(): No ending delimiter '^' found in C:\wamp\www\PHP8\API_REST\src\Controllers\Controller.php on line 74
+[05-Mar-2023 00:14:32 America/Bogota] PHP Warning:  preg_match(): No ending delimiter '^' found in C:\wamp\www\PHP8\API_REST\src\Controllers\Controller.php on line 74
+[05-Mar-2023 00:15:37 America/Bogota] PHP Warning:  preg_match(): Unknown modifier 'g' in C:\wamp\www\PHP8\API_REST\src\Controllers\Controller.php on line 74
+[05-Mar-2023 00:16:13 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:16:18 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:16:21 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:16:46 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:21:42 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:22:47 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:23:50 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
 Stack trace:
 #0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
-#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(69): App\Config\Security::verifyToken(Array, 'id_123dsafa')
-#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(26): App\Controllers\UserController->getOne('/user/2234526')
-#3 C:\wamp\www\PHP8\API_REST\public\index.php(24): require_once('C:\\wamp\\www\\PHP...')
+#1 C:\wamp\www\PHP8\API_REST\src\Controllers\ProductController.php(14): App\Config\Security::verifyToken(Array, 'id_123dsafa')
+#2 C:\wamp\www\PHP8\API_REST\src\Routes\product.php(19): App\Controllers\ProductController->save('/product')
+#3 C:\wamp\www\PHP8\API_REST\index.php(26): require_once('C:\\wamp\\www\\PHP...')
 #4 {main}
-[02-Mar-2023 23:26:37 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:26:45 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:26:51 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:27:09 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:27:29 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:28:31 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
-Stack trace:
-#0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
-#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(119): App\Config\Security::verifyToken(Array, 'id_123dsafa')
-#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(19): App\Controllers\UserController->post('/user')
-#3 C:\wamp\www\PHP8\API_REST\public\index.php(25): require_once('C:\\wamp\\www\\PHP...')
-#4 {main}
-[02-Mar-2023 23:29:16 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:29:23 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:29:31 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:29:54 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:30:52 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
-Stack trace:
-#0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
-#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(69): App\Config\Security::verifyToken(Array, 'id_123dsafa')
-#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(26): App\Controllers\UserController->getOne('/user/22345261')
-#3 C:\wamp\www\PHP8\API_REST\public\index.php(25): require_once('C:\\wamp\\www\\PHP...')
-#4 {main}
-[02-Mar-2023 23:31:10 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:31:22 America/Bogota] Token invalid => Firebase\JWT\ExpiredException: Expired token in C:\wamp\www\PHP8\API_REST\vendor\firebase\php-jwt\src\JWT.php:163
-Stack trace:
-#0 C:\wamp\www\PHP8\API_REST\src\Config\Security.php(52): Firebase\JWT\JWT::decode('eyJ0eXAiOiJKV1Q...', Object(Firebase\JWT\Key))
-#1 C:\wamp\www\PHP8\API_REST\src\Controllers\UserController.php(47): App\Config\Security::verifyToken(Array, 'id_123dsafa')
-#2 C:\wamp\www\PHP8\API_REST\src\Routes\user.php(24): App\Controllers\UserController->updatePassword('/user')
-#3 C:\wamp\www\PHP8\API_REST\public\index.php(25): require_once('C:\\wamp\\www\\PHP...')
-#4 {main}
-[02-Mar-2023 23:31:42 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:32:28 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:32:28 America/Bogota] Incorrect password
-[02-Mar-2023 23:32:37 America/Bogota] Conexión exitosa
-[02-Mar-2023 23:32:57 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:23:56 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:24:14 America/Bogota] Conexión exitosa
+[05-Mar-2023 00:25:13 America/Bogota] Conexión exitosa

@@ -5,16 +5,9 @@ use App\Config\ResponseHTTP;
 use App\Config\Security;
 use PDOException;
 
-class UserModel extends Model
+class User extends Model
 {
-  private string $name;
   public string $table = 'user';
-  private string $dni;
-  private string $email;
-  private string $rol;
-  private string $password;
-  private string $token;
-  private string $dateCreated;
 
   public function login(string $password, string $email)
   {

@@ -2,38 +2,27 @@
 namespace App\Controllers;
 
 use App\Config\Security;
-use App\Models\UserModel;
+use App\Models\User;
 
 class UserController extends Controller
 {
-  public function __construct(
-    private string $method,
-    private string $route,
-    private array $params,
-    private $data,
-    private $headers
-  )
-  {
-  }
-
-
   /* GET USERS */
-  final public function getAll(string $endpoint)
+  public function getAll(string $endpoint)
   {
     if (strtolower($this->method) === 'get' && trim($endpoint, '/') === $this->route) {
       Security::verifyToken($this->headers, Security::secretKey());
-      $userModel = new UserModel();
+      $userModel = new User();
       $user = $userModel->getAll();
       echo json_encode($user);
       exit;
     }
   }
   /* DELETE USER */
-  final public function delete(string $endpoint)
+  public function delete(string $endpoint)
   {
     if (strtolower($this->method) === 'delete' && trim($endpoint, '/') === $this->route) {
       Security::verifyToken($this->headers, Security::secretKey());
-      $userModel = new UserModel();
+      $userModel = new User();
       $idToken = $this->data['id_token'];
       $user = $userModel->delete($idToken);
       echo json_encode($user);
@@ -41,7 +30,7 @@ class UserController extends Controller
     }
   }
   /* UPDATE USER */
-  final public function updatePassword(string $endpoint)
+  public function updatePassword(string $endpoint)
   {
     if (strtolower($this->method) === 'patch' && trim($endpoint, '/') === $this->route) {
       Security::verifyToken($this->headers, Security::secretKey());
@@ -56,14 +45,14 @@ class UserController extends Controller
       if (count($validateErrors) > 0) {
         echo json_encode($validateErrors);
       } else {
-        $userModel = new UserModel();
+        $userModel = new User();
         $user = $userModel->updatePassword($this->data);
         echo json_encode($user);
       }
       exit;
     }
   }
-  final public function getOne(string $endpoint)
+  public function getOne(string $endpoint)
   {
     if (strtolower($this->method) === 'get' && trim($endpoint, '/') === $this->route) {
       Security::verifyToken($this->headers, Security::secretKey());
@@ -79,8 +68,8 @@ class UserController extends Controller
       if (count($validateErrors) > 0) {
         echo json_encode($validateErrors);
       } else {
-        $userModel = new UserModel();
-        $user = $userModel->get(dni: $data['dni']);
+        $userModel = new User();
+        $user = $userModel->get($data['dni']);
         echo json_encode($user);
       }
       exit;
@@ -88,7 +77,7 @@ class UserController extends Controller
   }
 
   /* LOGIN */
-  final public function login(string $endpoint)
+  public function login(string $endpoint)
   {
     if (
       strtolower($this->method) === 'post' &&
@@ -104,8 +93,8 @@ class UserController extends Controller
       } else {
         $email = strtolower($this->data['email']);
         $password = $this->data['password'];
-        $userModel = new UserModel();
-        $user = $userModel->login(password: $password, email: $email);
+        $userModel = new User();
+        $user = $userModel->login($password, $email);
         echo json_encode($user);
       }
       exit;
@@ -113,7 +102,7 @@ class UserController extends Controller
   }
 
   /* INSERT USER */
-  final public function post(string $endpoint)
+  public function post(string $endpoint)
   {
     if (strtolower($this->method) === 'post' && trim($endpoint, '/') === $this->route) {
       $rulesValidate = [
@@ -129,7 +118,7 @@ class UserController extends Controller
       if (count($validateErrors) > 0) {
         echo json_encode($validateErrors);
       } else {
-        $userModel = new UserModel();
+        $userModel = new User();
         $user = $userModel->save($this->data);
         echo json_encode($user);
       }

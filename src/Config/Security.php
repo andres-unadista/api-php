@@ -63,4 +63,77 @@ class Security
     $jwt_decoded = (array) self::$jwt_data;
     return $jwt_decoded;
   }
+
+  final public static function uploadFile(array $setupFile)
+  {
+    $name = $setupFile['input'];
+    $path = $setupFile['path'];
+    $maxSize = $setupFile['maxSize'];
+    $typeFiles = $setupFile['types'];
+    //Recogemos el file enviado por el formulario
+    $file = $_FILES[$name]['name'];
+    //Si el file contiene algo y es diferente de vacio
+    if (isset($file) && $file != "") {
+      //Obtenemos algunos datos necesarios sobre el file
+      $type = $_FILES[$name]['type'];
+      $size = $_FILES[$name]['size'];
+      $temp = $_FILES[$name]['tmp_name'];
+      //Se comprueba si el file a cargar es correcto observando su extensión y tamaño
+      $isValidFile = false;
+      foreach ($typeFiles as $validType) {
+        if (strpos($type, $validType) !== false) {
+          $isValidFile = true;
+        }
+      }
+      if (!$isValidFile || $size > $maxSize) {
+        return ['status' => false, 'msg'    => 'file format incorrect'];
+      } else {
+        //Si la imagen es correcta en tamaño y tipo
+        //Se intenta subir al servidor
+        if (move_uploaded_file($temp, $path)) {
+          return [
+            'status' => true,
+            'msg'    => 'file upload'
+          ];
+
+        } else {
+          return [
+            'status' => false,
+            'msg'    => 'error uploading file'
+          ];
+
+        }
+      }
+    } else {
+      return [
+        'status' => false,
+        'msg'    => 'File empty'
+      ];
+
+    }
+  }
+  final public static function uploadImage($files, $nameInput, $nameFile)
+  {
+
+    if ($files[$nameInput]) {
+      $typeFile = explode('.', $files[$nameInput]['name']);
+      $completeName = "{$nameFile}.{$typeFile[1]}";
+      $pathImage = str_replace('\\', '/', dirname(__DIR__, 2)) . "/public/images/{$completeName}";
+      $dataFile = [
+        'name'    => $completeName,
+        'input'   => $nameInput,
+        'path'    => $pathImage,
+        'maxSize' => 500000,
+        'types'   => ['jpeg', 'gif', 'jpg']
+      ];
+      $uploadFile = self::uploadFile($dataFile);
+      if ($uploadFile['status']) {
+        return $dataFile;
+      } else {
+        die(json_encode(ResponseHTTP::status_400($uploadFile['msg'])));
+      }
+    } else {
+      die(json_encode(ResponseHTTP::status_400('File name not found')));
+    }
+  }
 }
